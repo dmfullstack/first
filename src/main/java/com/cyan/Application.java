@@ -9,6 +9,9 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cyan.container.Container;
+import com.cyan.container.service.FirstService;
+
 @SpringBootApplication
 @RestController
 public class Application extends SpringBootServletInitializer {
@@ -27,7 +30,10 @@ public class Application extends SpringBootServletInitializer {
 	
 	@RequestMapping(value="/f")
 	public String first() {
-		logger.debug("=====================Somebody hit me");
-		return "First Spring Boot";
+		logger.debug("=====================Somebody hit me hard");
+		Container.init();
+		FirstService service = (FirstService) Container.getComponent("firstService");
+
+		return service.firstService();
 	}
 }
