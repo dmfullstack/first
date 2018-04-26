@@ -16,11 +16,11 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<project.basedir>/Users/Calvin/Documents/dev</project.basedir>
+		<project.basedir>/tmp/dev/first</project.basedir>
 	</properties>
 
-	<!-- <repositories> <repository> <id>maven-repository</id> <url>file:///${project.basedir}/maven-repository</url> 
-		<releases> <enabled>true</enabled> </releases> <snapshots> <enabled>true</enabled> 
+	<!-- <repositories> <repository> <id>maven-repository</id> <url>file:///${project.basedir}/maven-repository</url>
+		<releases> <enabled>true</enabled> </releases> <snapshots> <enabled>true</enabled>
 		</snapshots> </repository> </repositories> -->
 
 	<dependencies>
