@@ -5,6 +5,11 @@ pipeline {
     environment {
         EMAIL_RECIPIENTS = 'cyanzhoufeng@gmail.com'
     }
+
+    node {
+      def mvnHome = tool 'Maven3'
+      def pom = readMavenPom file: 'pom.xml'
+    }
     stages {
 
         stage('Build with unit testing') {
@@ -15,8 +20,7 @@ pipeline {
                     // ** NOTE: This 'M3' Maven tool must be configured
                     // **       in the global configuration.
                     echo 'Pulling...' + env.BRANCH_NAME
-                    def mvnHome = tool 'Maven3'
-                    def pom = readMavenPom file: 'pom.xml'
+
                     if (isUnix()) {
                         def targetVersion = getDevVersion()
                         print 'target build version...'
