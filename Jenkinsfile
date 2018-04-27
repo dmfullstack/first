@@ -6,10 +6,6 @@ pipeline {
         EMAIL_RECIPIENTS = 'cyanzhoufeng@gmail.com'
     }
 
-    node {
-      def mvnHome = tool 'Maven3'
-      def pom = readMavenPom file: 'pom.xml'
-    }
     stages {
 
         stage('Build with unit testing') {
@@ -25,6 +21,8 @@ pipeline {
                         def targetVersion = getDevVersion()
                         print 'target build version...'
                         print targetVersion
+                        def mvnHome = tool 'Maven3'
+                        def pom = readMavenPom file: 'pom.xml'
                         sh "'${mvnHome}/bin/mvn' -Dintegration-tests.skip=true -Dbuild.number=${targetVersion} clean package"
 
                         // get the current development version
@@ -62,7 +60,7 @@ pipeline {
                                 // replace it with your application name or make it easily loaded from pom.xml
                                 def jarName = "application-${developmentArtifactVersion}.jar"
                                 echo "the application is deploying ${jarName}"
-                                // NOTE : CREATE your deployemnt JOB, where it can take parameters whoch is the jar name to fetch from jenkins workspace
+                                // NOTE : CREATE your deployemnt JOB, where it can take parameters which is the jar name to fetch from jenkins workspace
                                 build job: 'ApplicationToDev', parameters: [[$class: 'StringParameterValue', name: 'jarName', value: jarName]]
                                 echo 'the application is deployed !'
                             } else {
@@ -218,6 +216,10 @@ def getDevVersion() {
     print 'build  versions...'
     print versionNumber
     return versionNumber
+}
+
+def ApplicationToDev(jarName) {
+    echo 'ApplicationToDev'
 }
 
 def getReleaseVersion() {
