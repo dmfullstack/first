@@ -16,12 +16,13 @@ pipeline {
                     // **       in the global configuration.
                     echo 'Pulling...' + env.BRANCH_NAME
                     def mvnHome = tool 'Maven3'
+                    def pom = readMavenPom file: 'pom.xml'
                     if (isUnix()) {
                         def targetVersion = getDevVersion()
                         print 'target build version...'
                         print targetVersion
                         sh "'${mvnHome}/bin/mvn' -Dintegration-tests.skip=true -Dbuild.number=${targetVersion} clean package"
-                        def pom = readMavenPom file: 'pom.xml'
+
                         // get the current development version
                         developmentArtifactVersion = "${pom.version}-${targetVersion}"
                         print pom.version
