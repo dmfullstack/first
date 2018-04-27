@@ -22,6 +22,7 @@ pipeline {
                         print 'target build version...'
                         print targetVersion
                         def mvnHome = tool 'Maven3'
+                        // Must install pipeline-utility-steps plugin
                         def pom = readMavenPom file: 'pom.xml'
                         sh "'${mvnHome}/bin/mvn' -Dintegration-tests.skip=true -Dbuild.number=${targetVersion} clean package"
 
@@ -202,7 +203,7 @@ def sendEmail(status) {
     mail(
             to: "$EMAIL_RECIPIENTS",
             subject: "Build $BUILD_NUMBER - " + status + " (${currentBuild.fullDisplayName})",
-            body: "Changes:\n " + getChangeString() + "\n\n Check console output at: env.$BUILD_URL/console" + "\n")
+            body: "Changes:\n " + getChangeString() + "\n\n Check console output at: $RUN_DISPLAY_URL" + "\n")
 }
 
 def getDevVersion() {
