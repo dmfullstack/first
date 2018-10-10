@@ -20,7 +20,8 @@ pipeline {
                         def targetVersion = getDevVersion()
                         print 'target build version...'
                         print targetVersion
-                        sh "'${mvnHome}/bin/mvn' -Dintegration-tests.skip=true -Dbuild.number=${targetVersion} clean package"
+                        //sh "'${mvnHome}/bin/mvn' -Dintegration-tests.skip=true -Dbuild.number=${targetVersion} clean package"
+                        sh "'mvn' -Dintegration-tests.skip=true -Dbuild.number=${targetVersion} clean package"
                         def pom = readMavenPom file: 'pom.xml'
                         // get the current development version
                         developmentArtifactVersion = "${pom.version}-${targetVersion}"
@@ -89,8 +90,11 @@ pipeline {
                             sh "git tag -f v${v}"
                             sh "git push -f --tags"
                         }
-                        sh "'${mvnHome}/bin/mvn' -Dmaven.test.skip=true  versions:set  -DgenerateBackupPoms=false -DnewVersion=${v}"
-                        sh "'${mvnHome}/bin/mvn' -Dmaven.test.skip=true clean deploy"
+                        //sh "'${mvnHome}/bin/mvn' -Dmaven.test.skip=true  versions:set  -DgenerateBackupPoms=false -DnewVersion=${v}"
+                        //sh "'${mvnHome}/bin/mvn' -Dmaven.test.skip=true clean deploy"
+
+                       sh "'mvn' -Dmaven.test.skip=true  versions:set  -DgenerateBackupPoms=false -DnewVersion=${v}"
+                        sh "'mvn' -Dmaven.test.skip=true clean deploy"
 
                     } else {
                         error "Release is not possible. as build is not successful"
