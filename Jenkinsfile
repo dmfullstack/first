@@ -59,7 +59,8 @@ pipeline {
                                 def jarName = "application-${developmentArtifactVersion}.jar"
                                 echo "the application is deploying ${jarName}"
                                 // NOTE : CREATE your deployemnt JOB, where it can take parameters whoch is the jar name to fetch from jenkins workspace
-                                build job: 'ApplicationToDev', parameters: [[$class: 'StringParameterValue', name: 'jarName', value: jarName]]
+                                //build job: 'ApplicationToDev', parameters: [[$class: 'StringParameterValue', name: 'jarName', value: jarName]]
+                                sh "'mvn' wildfly:deploy"
                                 echo 'the application is deployed !'
                             } else {
                                 error 'the application is not  deployed as development version is null!'

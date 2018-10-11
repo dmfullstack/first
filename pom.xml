@@ -38,11 +38,13 @@
 			<version>1.2.34</version>
 		</dependency>
 
+
 		<dependency>
 			<groupId>com.cyan</groupId>
 			<artifactId>container</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+	
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -117,6 +119,12 @@
 					<autoVersionSubmodules>true</autoVersionSubmodules>
 				</configuration>
 			</plugin>
+
+			   <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>1.2.2.Final</version>
+            </plugin>
 		</plugins>
 	</build>
 	<profiles>
