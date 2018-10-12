@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.cyan</groupId>
 	<artifactId>SpringFirst</artifactId>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<version>0.3-SNAPSHOT</version>
 	<name>SpringFirst Maven Webapp</name>
 	<url>http://maven.apache.org</url>
@@ -82,9 +82,9 @@
 
 	</dependencies>
 	<scm>
-		<connection>scm:git:https://github.com/CyanZero/first.git</connection>
-		<developerConnection>scm:git:git@github.com:CyanZero/first.git</developerConnection>
-		<url>https://github.com/CyanZero/first</url>
+		<connection>scm:git:https://github.com/dmfullstack/first.git</connection>
+		<developerConnection>scm:git:git@github.com:dmfullstack/first.git</developerConnection>
+		<url>https://github.com/dmfullstack/first</url>
 		<tag>ORIG_HEAD</tag>
 	</scm>
 	<distributionManagement>
@@ -117,6 +117,15 @@
 					<autoVersionSubmodules>true</autoVersionSubmodules>
 				</configuration>
 			</plugin>
+			   <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>1.2.2.Final</version>
+				      <configuration>
+                    <username>dineshmetkari</username>
+                    <password>DM$010674</password>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 	<profiles>

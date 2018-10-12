@@ -3,7 +3,7 @@ pipeline {
     agent any
     // global env variables
     environment {
-        EMAIL_RECIPIENTS = 'cyanzhoufeng@gmail.com'
+        EMAIL_RECIPIENTS = 'dineshmetkari@gmail.com'
     }
 
     stages {
@@ -21,10 +21,11 @@ pipeline {
                         def targetVersion = getDevVersion()
                         print 'target build version...'
                         print targetVersion
-                        def mvnHome = tool 'Maven3'
+                        //def mvnHome = tool 'Maven3'
                         // Must install pipeline-utility-steps plugin
                         def pom = readMavenPom file: 'pom.xml'
                         sh "'${mvnHome}/bin/mvn' -Dintegration-tests.skip=true -Dbuild.number=${targetVersion} clean package"
+                        sh "'mvn' -Dintegration-tests.skip=true -Dbuild.number=${targetVersion} clean package"
 
                         // get the current development version
                         developmentArtifactVersion = "${pom.version}-${targetVersion}"
@@ -62,7 +63,8 @@ pipeline {
                                 def jarName = "application-${developmentArtifactVersion}.jar"
                                 echo "the application is deploying ${jarName}"
                                 // NOTE : CREATE your deployemnt JOB, where it can take parameters which is the jar name to fetch from jenkins workspace
-                                build job: 'ApplicationToDev', parameters: [[$class: 'StringParameterValue', name: 'jarName', value: jarName]]
+                                //build job: 'ApplicationToDev', parameters: [[$class: 'StringParameterValue', name: 'jarName', value: jarName]]
+                                 sh "'mvn' wildfly:deploy"
                                 echo 'the application is deployed !'
                             } else {
                                 error 'the application is not  deployed as development version is null!'
@@ -81,7 +83,7 @@ pipeline {
             steps {
                 // create the release version then create a tage with it , then push to nexus releases the released jar
                 script {
-                    def mvnHome = tool 'Maven 3.3.9' //
+                    //def mvnHome = tool 'Maven 3.3.9' //
                     if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
                         def v = getReleaseVersion()
                         releasedVersion = v;
@@ -93,8 +95,12 @@ pipeline {
                             sh "git tag -f v${v}"
                             sh "git push -f --tags"
                         }
-                        sh "'${mvnHome}/bin/mvn' -Dmaven.test.skip=true  versions:set  -DgenerateBackupPoms=false -DnewVersion=${v}"
-                        sh "'${mvnHome}/bin/mvn' -Dmaven.test.skip=true clean deploy"
+                        //sh "'${mvnHome}/bin/mvn' -Dmaven.test.skip=true  versions:set  -DgenerateBackupPoms=false -DnewVersion=${v}"
+                        //sh "'${mvnHome}/bin/mvn' -Dmaven.test.skip=true clean deploy"
+
+                        sh "'mvn' -Dmaven.test.skip=true  versions:set  -DgenerateBackupPoms=false -DnewVersion=${v}"
+                        sh "'mvn' -Dmaven.test.skip=true clean deploy"
+
 
                     } else {
                         error "Release is not possible. as build is not successful"
@@ -122,7 +128,9 @@ pipeline {
                                 echo "the application is deploying ${jarName}"
                                 // NOTE : DO NOT FORGET to create your UAT deployment jar , check Job AlertManagerToUAT in Jenkins for reference
                                 // the deployemnt should be based into Nexus repo
-                                build job: 'AApplicationToACC', parameters: [[$class: 'StringParameterValue', name: 'jarName', value: jarName], [$class: 'StringParameterValue', name: 'appVersion', value: releasedVersion]]
+                                //build job: 'AApplicationToACC', parameters: [[$class: 'StringParameterValue', name: 'jarName', value: jarName], [$class: 'StringParameterValue', name: 'appVersion', value: releasedVersion]]
+                                sh "'mvn' wildfly:deploy"
+                                
                                 echo 'the application is deployed !'
                             } else {
                                 error 'the application is not  deployed as released version is null!'
