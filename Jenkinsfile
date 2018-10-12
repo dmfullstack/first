@@ -51,12 +51,12 @@ pipeline {
             steps {
                 script {
                     if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
-                        timeout(time: 3, unit: 'MINUTES') {
+                        timeout(time: 12, unit: 'MINUTES') {
                             // you can use the commented line if u have specific user group who CAN ONLY approve
                             //input message:'Approve deployment?', submitter: 'it-ops'
                             input message: 'Approve deployment?'
                         }
-                        timeout(time: 2, unit: 'MINUTES') {
+                        timeout(time: 12, unit: 'MINUTES') {
                             //
                             if (developmentArtifactVersion != null && !developmentArtifactVersion.isEmpty()) {
                                 // replace it with your application name or make it easily loaded from pom.xml
@@ -116,11 +116,11 @@ pipeline {
             steps {
                 script {
                     if (currentBuild.result == null || currentBuild.result == 'SUCCESS') {
-                        timeout(time: 3, unit: 'MINUTES') {
+                        timeout(time: 12, unit: 'MINUTES') {
                             //input message:'Approve deployment?', submitter: 'it-ops'
                             input message: 'Approve deployment to UAT?'
                         }
-                        timeout(time: 3, unit: 'MINUTES') {
+                        timeout(time: 12, unit: 'MINUTES') {
                             //  deployment job which will take the relasesed version
                             if (releasedVersion != null && !releasedVersion.isEmpty()) {
                                 // make the applciation name for the jar configurable
