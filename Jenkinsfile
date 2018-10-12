@@ -24,7 +24,7 @@ pipeline {
                         //def mvnHome = tool 'Maven3'
                         // Must install pipeline-utility-steps plugin
                         def pom = readMavenPom file: 'pom.xml'
-                        sh "'${mvnHome}/bin/mvn' -Dintegration-tests.skip=true -Dbuild.number=${targetVersion} clean package"
+                        //sh "'${mvnHome}/bin/mvn' -Dintegration-tests.skip=true -Dbuild.number=${targetVersion} clean package"
                         sh "'mvn' -Dintegration-tests.skip=true -Dbuild.number=${targetVersion} clean package"
 
                         // get the current development version
