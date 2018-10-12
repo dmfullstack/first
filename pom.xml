@@ -84,9 +84,9 @@
 
 	</dependencies>
 	<scm>
-		<connection>scm:git:https://github.com/CyanZero/first.git</connection>
-		<developerConnection>scm:git:git@github.com:CyanZero/first.git</developerConnection>
-		<url>https://github.com/CyanZero/first</url>
+		<connection>scm:git:https://github.com/dmfullstack/first.git</connection>
+		<developerConnection>scm:git:git@github.com:dmfullstack/first.git</developerConnection>
+		<url>https://github.com/dmfullstack/first</url>
 		<tag>ORIG_HEAD</tag>
 	</scm>
 	<distributionManagement>
