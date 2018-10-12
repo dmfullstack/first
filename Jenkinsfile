@@ -89,10 +89,12 @@ pipeline {
                         // jenkins user credentials ID which is transparent to the user and password change
                         //sshagent(['0000000-3b5a-454e-a8e6-c6b6114d36000']) {
                        //sshagent(['dmfullstack']) {    
-                        sshagent (credentials: ['dmfullstack']) {     
-                            sh "git tag -f v${v}"
-                            sh "git push -f --tags"
-                        }
+
+                       //TODO CHECKOUT SSHAGENT    
+                       // sshagent (credentials: ['dmfullstack']) {     
+                       //     sh "git tag -f v${v}"
+                        //    sh "git push -f --tags"
+                       // }
                         //sh "'${mvnHome}/bin/mvn' -Dmaven.test.skip=true  versions:set  -DgenerateBackupPoms=false -DnewVersion=${v}"
                         //sh "'${mvnHome}/bin/mvn' -Dmaven.test.skip=true clean deploy"
 
