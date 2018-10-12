@@ -25,6 +25,7 @@
 
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+		
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
@@ -51,6 +52,7 @@
 		</dependency>
 
 		<!-- marked the embedded servlet container as provided -->
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>

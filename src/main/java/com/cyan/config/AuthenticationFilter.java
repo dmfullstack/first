@@ -51,7 +51,9 @@ public class AuthenticationFilter implements Filter {
 		try {
 			 HttpServletRequest httpRequest = (HttpServletRequest)request;  
 	         String jwt = httpRequest.getHeader("Authorization");
-	         if(httpRequest.getRequestURI().equals("/getToken")){
+	         //if(httpRequest.getRequestURI().equals("/getToken")){
+				 System.out.println("/////////Branch: Master   /// REQUESTUI: "+httpRequest.getRequestURI().toString());
+			 if(httpRequest.getRequestURI().endsWith("/getToken")){	 
 	        	 return AuthenticationEnum.PERMISSION_OK;
 	         }
 	         Claims claims =JwtUtil.parseJWT(jwt);
