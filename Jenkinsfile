@@ -4,7 +4,7 @@ pipeline {
     // global env variables
     environment {
         EMAIL_RECIPIENTS = 'dineshmetkari@gmail.com'
-    }
+    }  
 
     stages {
 
